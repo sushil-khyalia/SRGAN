@@ -4,6 +4,8 @@ import numpy as np
 from torch import nn
 from torchvision.models import vgg19
 
+torch.set_default_tensor_type(torch.cuda.DoubleTensor)
+
 class PerceptualLoss(nn.Module):
     def __init__(self):
         super(PerceptualLoss,self).__init__()

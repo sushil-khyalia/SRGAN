@@ -4,6 +4,8 @@ import numpy as np
 from torch import nn
 from helperLayers import *
 
+torch.set_default_tensor_type(torch.cuda.DoubleTensor)
+
 class Generator(nn.Module):
     def __init__(self):
         super(Generator,self).__init__()

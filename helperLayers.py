@@ -3,6 +3,8 @@ import torchsummary
 import numpy as np
 from torch import nn
 
+torch.set_default_tensor_type(torch.cuda.DoubleTensor)
+
 class ResBlock(nn.Module):
     def __init__(self,kernel_size,channels,padding,stride):
         super(ResBlock,self).__init__()
