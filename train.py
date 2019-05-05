@@ -1,6 +1,6 @@
 import torch
 from torchvision import transforms,datasets
-from src import *
+from src import model,loss
 import numpy as np
 import scipy.misc
 import matplotlib.pyplot as plt
