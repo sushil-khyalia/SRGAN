@@ -2,7 +2,7 @@ import torch
 import torchsummary
 import numpy as np
 from torch import nn
-from helperLayers import *
+from src.helperLayers import *
 
 torch.set_default_tensor_type(torch.cuda.FloatTensor)
 
