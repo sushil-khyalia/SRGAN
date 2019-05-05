@@ -1,6 +1,5 @@
 import torch
 from torchvision import transforms,datasets
-import helperLayers
 from src import *
 import numpy as np
 import scipy.misc
