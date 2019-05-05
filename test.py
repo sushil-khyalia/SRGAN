@@ -25,6 +25,7 @@ def test(args):
 
     test_files = os.listdir(input_folder)
 
+    os.system('mkdir -p '+output_folder)
     for test_file in test_files:
         img_path = input_folder+'/'+test_file
         inp = imageio.imread(img_path)
