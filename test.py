@@ -1,55 +1,50 @@
+####################################################
+# This script uses Generator network to generate High Resolution (4x) images from the Low resolution images
+####################################################
+
+import torch
+from torchvision import transforms,datasets
+from src import model,loss
+import numpy as np
+import scipy.misc
+import matplotlib.pyplot as plt
+import argparse
+import imageio
 import os
 
-os.system("make clean")
-os.system("make")
-test_files = os.listdir('./test_cases')
-# os.system('mkdir -p token_output')
-# os.system('mkdir -p parse_output')
-# os.system('mkdir -p ast_output')
-# os.system('mkdir -p symtab_output')
-os.system('mkdir -p icode_output')
-os.system('mkdir -p spim_output')
-# os.system('mkdir -p eval_output')
+torch.set_default_tensor_type(torch.cuda.FloatTensor)
 
-for file in test_files:
-	os.system('echo "========================= "' + file + '" =========================="')
-	## Run Reference Implementation
-	os.system('echo "---- Running reference implementation ... ----"')
-	os.system("./sclp  -icode " + "./test_cases/" + file)
-	# os.system("mv " + "./test_cases/" + file + ".toks " + "./token_output/" + file + ".toks.sclp")
-	# os.system("mv " + "./test_cases/" + file + ".parse.sclp " + "./parse_output/" + file + ".parse.sclp")
-	# os.system("mv " + "./test_cases/" + file + ".ast " + "./ast_output/" + file + ".ast.sclp")
-	# os.system("mv " + "./test_cases/" + file + ".sym " + "./symtab_output/" + file + ".sym.sclp")
-	os.system("mv " + "./test_cases/" + file + ".ic " + "./icode_output/" + file + ".ic.sclp")
-	os.system("./sclp " + "./test_cases/" + file)
-	os.system("mv " + "./test_cases/" + file + ".spim " + "./spim_output/" + file + ".spim.sclp")
-	# os.system("./sclp -eval " + "./test_cases/" + file)
-	# os.system("mv " + "./test_cases/" + file + ".eval " + "./eval_output/" + file + ".eval.sclp")
-	## Run Test Implementation
-	os.system('echo "---- Running test implementation ... ----"')
-	os.system("./mysclp -icode " + "./test_cases/" + file)
-	# os.system("mv " + "./test_cases/" + file + ".toks " + "./token_output/" + file + ".toks")
-	# os.system("mv " + "./test_cases/" + file + ".parse " + "./parse_output/" + file + ".parse")
-	# os.system("mv " + "./test_cases/" + file + ".ast " + "./ast_output/" + file + ".ast")
-	# os.system("mv " + "./test_cases/" + file + ".sym " + "./symtab_output/" + file + ".sym")
-	os.system("mv " + "./test_cases/" + file + ".ic " + "./icode_output/" + file + ".ic")
-	os.system("mv " + "./test_cases/" + file + ".spim " + "./spim_output/" + file + ".spim")
-	# os.system("./mysclp -eval " + "./test_cases/" + file)
-	# os.system("mv " + "./test_cases/" + file + ".eval " + "./eval_output/" + file + ".eval")
-	##
-	# os.system('echo "Testing tokens output ..."')
-	# os.system("diff " + "./token_output/" + file + ".toks " + "./token_output/" + file + ".toks.sclp")
-	# os.system('echo "Testing parse output ..."')
-	# os.system("diff " + "./parse_output/" + file + ".parse " + "./parse_output/" + file + ".parse.sclp")
-	# os.system('echo "Testing ast output ..."')
-	# os.system("diff " + "./ast_output/" + file + ".ast " + "./ast_output/" + file + ".ast.sclp")
-	# os.system('echo "Testing symtab output ..."')
-	# os.system("diff " + "./symtab_output/" + file + ".sym " + "./symtab_output/" + file + ".sym.sclp")
-	os.system('echo "Testing icode output ..."')
-	os.system("diff " + "./icode_output/" + file + ".ic " + "./icode_output/" + file + ".ic.sclp")
-	os.system('echo "Testing spim output ..."')
-	os.system("diff " + "./spim_output/" + file + ".spim " + "./spim_output/" + file + ".spim.sclp")
-	# os.system('echo "Testing eval output ..."')
-	# os.system("diff " + "./eval_output/" + file + ".eval " + "./eval_output/" + file + ".eval.sclp")
-	os.system('echo "=================================================================="')
-	
+def test(args):
+    generator = model.Generator().cuda()
+
+    gen_model = args.gen_model
+    input_folder = args.input_folder
+    output_folder = args.input_folder
+
+    generator.load_state_dict(torch.load(gen_model))
+
+    test_files = os.listdir(input_folder)
+
+    for test_file in test_files:
+        img_path = input_folder+'/'+test_file
+        inp = imageio.imread(img_path)
+        if len(inp.shape) == 3:
+            out = generator(torch.from_numpy((inp/255).transpose((2,0,1))).cuda().type(torch.cuda.FloatTensor).unsqueeze(0))
+        else:
+            inp = np.array([inp,inp,inp])
+            print(inp.shape)
+            out = generator(torch.from_numpy(inp/255).cuda().type(torch.cuda.FloatTensor).unsqueeze(0))
+        out = out.clamp(min=-1,max=1)
+        out = (out+1)/2
+        plt.figure()
+        plt.imshow(out[0].cpu().detach().numpy().transpose(1,2,0))
+        plt.imsave(output_folder+'/output_' + test_file,out[0].cpu().detach().numpy().transpose(1,2,0))
+
+if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--gen_model",type=str,default=None,help="Path to weights of Generator")
+    parser.add_argument("--input_folder",type=str,default=None,help="Path to input image folder")
+    parser.add_argument("--output_folder",type=str,default=None,help="Path to output image folder")
+    args = parser.parse_args()
+    test(args)
