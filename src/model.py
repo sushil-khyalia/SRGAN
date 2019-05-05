@@ -6,9 +6,11 @@ from src.helperLayers import *
 
 torch.set_default_tensor_type(torch.cuda.FloatTensor)
 
+# class defining generator model
 class Generator(nn.Module):
     def __init__(self):
         super(Generator,self).__init__()
+        # initializing sub layers
         self.conv1 = nn.Conv2d(in_channels=3,kernel_size=9,out_channels=64,padding=4,stride=1)
         self.prelu1 = nn.PReLU()
         self.resblock1 = ResBlock(channels=64,kernel_size=3,padding=1,stride=1)
@@ -34,6 +36,7 @@ class Generator(nn.Module):
         self.conv3 = nn.Conv2d(in_channels=64,kernel_size=9,out_channels=3,padding=4,stride=1)
 
     def forward(self,inp):
+        # defining forward pass
         x = self.conv1(inp)
         x = self.prelu1(x)
         y = self.resblock1(x)
@@ -59,10 +62,11 @@ class Generator(nn.Module):
         output = self.conv3(y)
         return output
 
-
+# class defining discriminator model
 class Discriminator(nn.Module):
     def __init__(self):
         super(Discriminator,self).__init__()
+        # initializing sub layers
         self.conv1 = nn.Conv2d(in_channels=3,kernel_size=3,out_channels=64,padding=1,stride=1)
         self.leaky_relu1 = nn.LeakyReLU(negative_slope=0.2)
         self.convblock1 = ConvBlock(kernel_size=3,in_channels=64,out_channels=64,padding=1,stride=2)
@@ -77,6 +81,7 @@ class Discriminator(nn.Module):
         self.dense2 = nn.Linear(in_features=1024,out_features=1)
         self.sigmoid1 = nn.Sigmoid()
     def forward(self,inp):
+        # defining forward pass
         x = self.conv1(inp)
         x = self.leaky_relu1(x)
         x = self.convblock1(x)
