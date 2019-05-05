@@ -1,7 +1,3 @@
-####################################################
-# This script uses Generator network to generate High Resolution (4x) images from the Low resolution images
-####################################################
-
 import torch
 from torchvision import transforms,datasets
 from src import model,loss
@@ -19,18 +15,19 @@ def test(args):
 
     gen_model = args.gen_model
     input_folder = args.input_folder
-    output_folder = args.input_folder
+    output_folder = args.output_folder
 
     generator.load_state_dict(torch.load(gen_model))
 
+    os.system('mkdir -p '+output_folder)
+
     test_files = os.listdir(input_folder)
 
-    os.system('mkdir -p '+output_folder)
     for test_file in test_files:
         img_path = input_folder+'/'+test_file
         inp = imageio.imread(img_path)
         if len(inp.shape) == 3:
-            out = generator(torch.from_numpy((inp/255).transpose((2,0,1))).cuda().type(torch.cuda.FloatTensor).unsqueeze(0))
+            out = generator(torch.from_numpy((inp[:,:,:3]/255).transpose((2,0,1))).cuda().type(torch.cuda.FloatTensor).unsqueeze(0))
         else:
             inp = np.array([inp,inp,inp])
             print(inp.shape)
