@@ -103,6 +103,6 @@ if __name__ == '__main__':
     parser.add_argument("--gen_model",type=str,default=None,help="Path to weights of Generator")
     parser.add_argument("--disc_model",type=str,default=None,help="Path to weights of Discriminator")
     parser.add_argument("--num_epochs",type=int,help="Number of epochs to train")
-    parser.add_argument("--train_discriminator",type=lambda x: (str(x).lower() in ['true','1', 'yes']),help="Set true to train both Generator and Discriminator")
+    parser.add_argument("--train_discriminator",type=lambda x: (str(x).lower() in ['true','1', 'yes']),default=False,help="Set true to train both Generator and Discriminator")
     args = parser.parse_args()
     train(args)
