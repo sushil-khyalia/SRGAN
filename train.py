@@ -8,7 +8,7 @@ import argparse
 
 torch.set_default_tensor_type(torch.cuda.FloatTensor)
 
-def main(args):
+def train(args):
     data_path = args.data_path
     train_dataset = datasets.ImageFolder(
     data_path,
@@ -104,3 +104,5 @@ if __name__ == '__main__':
     parser.add_argument("--disc_model",type=str,default=None,help="Path to weights of Discriminator")
     parser.add_argument("--num_epochs",type=int,help="Number of epochs to train")
     parser.add_argument("--train_discriminator",type=bool,default=False,help="Set true to train both Generator and Discriminator")
+    args = parser.parse_args()
+    train(args)
