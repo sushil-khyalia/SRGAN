@@ -37,25 +37,27 @@ Test Images have been sampled from the widely used bechmark datasets __SET5__ [ 
 ## Usage
 
 ### Train
-
-> python train.py --data_path <Path to the training dataset>
->                 --batch_size <Batch Size to be used for training>
->                
->optional Arguments:
->--gen_model               <Path to pretrained-weights of Generator>, Default: Random Initialisation
->--disc_model              <Path to pretrained-weights of Discriminator>, Default: Random Initialisation
->--num_epochs              <number of epochs to train>, Default 30
->--train_discriminator     <Set true to train both Generator and Discriminator>, Default=False
+```
+python train.py --data_path <Path to the training dataset>
+                 --batch_size <Batch Size to be used for training>
+                
+optional Arguments:
+--gen_model               <Path to pretrained-weights of Generator>, Default: Random Initialisation
+--disc_model              <Path to pretrained-weights of Discriminator>, Default: Random Initialisation
+--num_epochs              <number of epochs to train>, Default 30
+--train_discriminator     <Set true to train both Generator and Discriminator>, Default=False
+```
 
 ### Test
-
->python test.py --gen_model <Path to weights of Generator>
->                --input_folder <Path to input image folder>
->                --output Folder <Path to output image folder>`
+```
+python test.py --gen_model <Path to weights of Generator>
+                --input_folder <Path to input image folder>
+                --output Folder <Path to output image folder>
+```
 
 ## Results
 
-A comparison of PSNR(Peak Signal To Noise Ration) and SSIM (Structural Similarity Index) for Nearest Neighbours, cubic interpolation, our SRGAN model implementation and author's implementation taken from [here](https://github.com/tensorlayer/srgan/releases/tag/1.2.0). We used the skimage library to compute [psnr](https://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.compare_psnr) and [ssim](https://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.compare_ssim) on the y-channel of the image (converted to ycbcr format).
+A comparison of [PSNR](https://en.wikipedia.org/wiki/Peak_signal-to-noise_ratio)(Peak Signal To Noise Ration) and [SSIM](https://en.wikipedia.org/wiki/Structural_similarity) (Structural Similarity Index) for Nearest Neighbours, cubic interpolation, our SRGAN model implementation and author's implementation taken from [here](https://github.com/tensorlayer/srgan/releases/tag/1.2.0). We used the skimage library to compute [PSNR](https://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.compare_psnr) and [SSIM](https://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.compare_ssim) on the y-channel of the image (converted to ycbcr format).
 
 #### Results on SET5
 
@@ -94,8 +96,13 @@ Here are some more results of SR of Images from from __SET5__, __SET14__ and __B
 
 ![alt test](https://github.com/sushil-khyalia/SRGAN/blob/master/img/img6.PNG "img5")
 
+## Observations
 
+From the results above, it can be seen that despite bicubic interpolation giving better PSNR and SSIM values for images as compared to SRGAN is unable to produce perceptually appealing solutions like SRGAN (as apparent from the images shown above). Hence minimising MSE, although gives better PSNR and SSIM values but is unable to recover the high frequency details like texture and over smoothens the image.
 
-                
+## References
+
+*[Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial
+Network](https://arxiv.org/pdf/1609.04802.pdf)
 
 
