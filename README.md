@@ -12,6 +12,8 @@ Instead of using the pixel wise loss function like MSE, commonly used for this t
 
 ![alt test](https://github.com/sushil-khyalia/SRGAN/blob/master/img/srgan_bicubic.PNG "srgan_vs_bicubic")
 
+(_Taken from SRGAN paper_)
+
 ## Requirements
 
 Kindly use the requirements.txt to set up your machine for replicating this experiment. some dependendecies are :
@@ -96,6 +98,22 @@ Here are some more results of SR of Images from from __SET5__, __SET14__ and __B
 
 ![alt test](https://github.com/sushil-khyalia/SRGAN/blob/master/img/img6.PNG "img5")
 
+Some Results showing a comparison between our's (left) and author's model (right):
+
+![alt test](https://github.com/sushil-khyalia/SRGAN/blob/master/img/img8.PNG "img8")
+
+![alt test](https://github.com/sushil-khyalia/SRGAN/blob/master/img/img9.PNG "img9")
+
+![alt test](https://github.com/sushil-khyalia/SRGAN/blob/master/img/img14.PNG "img14")
+
+![alt test](https://github.com/sushil-khyalia/SRGAN/blob/master/img/img10.PNG "img10")
+
+![alt test](https://github.com/sushil-khyalia/SRGAN/blob/master/img/img11.PNG "img11")
+
+![alt test](https://github.com/sushil-khyalia/SRGAN/blob/master/img/img15.PNG "img15")
+
+Our model seems to produce colder images (zerbra, clownfish images) as compared to author's. Also the author's model sometimes produces a more richer texture, perhaps because we have not completed the training of our model yet, which may lead to more realistic images but can also lead to halucination of finer details (windows in 3rd image) as if the model is trying too hard to create details which weren't there, which might be considered a form of overfitting.
+ 
 ## Observations
 
 From the results above, it can be seen that despite bicubic interpolation giving better PSNR and SSIM values for images as compared to SRGAN is unable to produce perceptually appealing solutions like SRGAN (as apparent from the images shown above). Hence minimising MSE, although gives better PSNR and SSIM values but is unable to recover the high frequency details like texture and produce overly-smooth images.
