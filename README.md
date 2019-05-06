@@ -38,20 +38,20 @@ Test Images have been sampled from the widely used bechmark datasets __SET5__ [ 
 
 ### Train
 
-`python train.py --data_path <Path to the training dataset>
-                 --batch_size <Batch Size to be used for training>
-                
-optional Arguments:
---gen_model               <Path to pretrained-weights of Generator>, Default: Random Initialisation
---disc_model              <Path to pretrained-weights of Discriminator>, Default: Random Initialisation
---num_epochs              <number of epochs to train>, Default 30
---train_discriminator     <Set true to train both Generator and Discriminator>, Default=False`
+> python train.py --data_path <Path to the training dataset>
+>                 --batch_size <Batch Size to be used for training>
+>                
+>optional Arguments:
+>--gen_model               <Path to pretrained-weights of Generator>, Default: Random Initialisation
+>--disc_model              <Path to pretrained-weights of Discriminator>, Default: Random Initialisation
+>--num_epochs              <number of epochs to train>, Default 30
+>--train_discriminator     <Set true to train both Generator and Discriminator>, Default=False
 
 ### Test
 
-`python test.py --gen_model <Path to weights of Generator>
-                --input_folder <Path to input image folder>
-                --output Folder <Path to output image folder>`
+>python test.py --gen_model <Path to weights of Generator>
+>                --input_folder <Path to input image folder>
+>                --output Folder <Path to output image folder>`
 
 ## Results
 
@@ -59,22 +59,22 @@ A comparison of PSNR(Peak Signal To Noise Ration) and SSIM (Structural Similarit
 
 #### Results on SET5
 
-| SET5 | nearest | bicubic | CVPR17 | ours |
-| ---- |:-------:| :-----: | :----: | ---: |
+| SET5 | nearest | bicubic | CVPR17 | Ours |
+| ---- |:-------:| :-----: | :----: | :--: |
 | PSNR | 26.2582 | 28.4304 | 28.2102 | 27.2761 |
 | SSIM | 0.7639 | 0.8231 | 0.8323 | 0.8162 |
 
 #### Results on SET14
 
-| SET5 | nearest | bicubic | CVPR17 | ours |
-| ---- |:-------:| :-----: | :----: | ---: |
+| SET5 | nearest | bicubic | CVPR17 | Ours |
+| ---- |:-------:| :-----: | :----: | :--: |
 | PSNR | 24.8309 | 26.2132 | 26.1595 | 25.6378 |
 | SSIM | 0.6909 | 0.7312 | 0.7329 | 0.7314 |
 
 #### Results on BSD 100
 
-| SET5 | nearest | bicubic | CVPR17 | ours |
-| ---- |:-------:| :-----: | :----: | ---: |
+| SET5 | nearest | bicubic | CVPR17 | Ours |
+| ---- |:-------:| :-----: | :----: | :--: |
 | PSNR | 25.037 | 25.9613 | 24.6297 | 24.5921 |
 | SSIM | 0.6539 | 0.6856 | 0.6643 | 0.6637 |
 
