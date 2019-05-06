@@ -68,17 +68,17 @@ A comparison of [PSNR](https://en.wikipedia.org/wiki/Peak_signal-to-noise_ratio)
 
 #### Results on SET14
 
-| SET5 | nearest | bicubic | CVPR17 | Ours |
-| ---- |:-------:| :-----: | :----: | :--: |
-| PSNR | 24.8309 | 26.2132 | 26.1595 | 25.6378 |
-| SSIM | 0.6909 | 0.7312 | 0.7329 | 0.7314 |
+| SET14 | nearest | bicubic | CVPR17 | Ours |
+| ----  |:-------:| :-----: | :----: | :--: |
+| PSNR  | 24.8309 | 26.2132 | 26.1595 | 25.6378 |
+| SSIM  | 0.6909 | 0.7312 | 0.7329 | 0.7314 |
 
 #### Results on BSD 100
 
-| SET5 | nearest | bicubic | CVPR17 | Ours |
-| ---- |:-------:| :-----: | :----: | :--: |
-| PSNR | 25.037 | 25.9613 | 24.6297 | 24.5921 |
-| SSIM | 0.6539 | 0.6856 | 0.6643 | 0.6637 |
+| BSD100 | nearest | bicubic | CVPR17 | Ours |
+| ----   |:-------:| :-----: | :----: | :--: |
+| PSNR   | 25.037 | 25.9613 | 24.6297 | 24.5921 |
+| SSIM   | 0.6539 | 0.6856 | 0.6643 | 0.6637 |
 
 Shown below is a comparison of 3 different upsclaing methods:
 
