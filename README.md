@@ -98,7 +98,7 @@ Here are some more results of SR of Images from from __SET5__, __SET14__ and __B
 
 ## Observations
 
-From the results above, it can be seen that despite bicubic interpolation giving better PSNR and SSIM values for images as compared to SRGAN is unable to produce perceptually appealing solutions like SRGAN (as apparent from the images shown above). Hence minimising MSE, although gives better PSNR and SSIM values but is unable to recover the high frequency details like texture and over smoothens the image.
+From the results above, it can be seen that despite bicubic interpolation giving better PSNR and SSIM values for images as compared to SRGAN is unable to produce perceptually appealing solutions like SRGAN (as apparent from the images shown above). Hence minimising MSE, although gives better PSNR and SSIM values but is unable to recover the high frequency details like texture and produce overly-smooth images.
 
 ## References
 
