@@ -112,7 +112,7 @@ Some Results showing a comparison between our's (left) and author's model (right
 
 ![alt test](https://github.com/sushil-khyalia/SRGAN/blob/master/img/img15.PNG "img15")
 
-Our model seems to produce colder images (zerbra, clownfish images) as compared to author's. Also sometimes author's model produces a more richer textured image, perhaps because we have not completed the training of our model yet, which may lead to more realistic images but can also lead to halucination of finer details (windows in 3rd image) as if the model is trying too hard to create details which weren't there, which might be considered a form of overfitting.
+Our model seems to produce colder images (eg. lady, zerbra images) as compared to author's. Also sometimes author's model produces a more richer textured image, perhaps because we have not completed the training of our model yet, which may lead to more realistic images but can also lead to halucination of finer details (windows in 3rd image) as if the model is trying too hard to create details which weren't there, which might be considered a form of overfitting.
  
 ## Observations
 
